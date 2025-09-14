@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Membretes de Enfermería</title>
+  <link rel="icon" type="image/png" href="LOGO.jpeg">
+
   <style>
-    /* Fuente bonita y colores suaves */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
 
     body {
@@ -17,12 +18,21 @@
     }
 
     header {
-      background-color: #ff99cc; /* rosa más fuerte */
+      background-color: #ff99cc;
       padding: 20px;
       text-align: center;
       color: white;
       font-family: 'Pacifico', cursive;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    header img {
+      height: 120px; /* logo grande */
+      border-radius: 10px;
     }
 
     nav {
@@ -125,13 +135,31 @@
       font-weight: bold;
       box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
     }
+
+    /* Estilo para el iframe del catálogo */
+    .catalogo-container {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .catalogo-container iframe {
+      width: 90%;
+      height: 600px;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Membretes de Enfermería</h1>
-    <p>Catálogo de membretes personalizados</p>
+    <img src="LOGO.jpeg" alt="Logo Membretes">
+    <div>
+      <h1>Membretes de Enfermería</h1>
+      <p>Catálogo de membretes personalizados</p>
+    </div>
   </header>
 
   <nav>
@@ -143,28 +171,24 @@
   <div class="container">
     <h2>Nuestros Diseños</h2>
     <div class="productos">
-      <!-- Producto 1 -->
       <div class="card">
         <img src="membrete1.jpg" alt="Membrete Azul">
         <h3>Membrete Soluciones</h3>
         <p>Diseño limpio y profesional en tonos azules.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Azul" target="_blank" class="btn">Comprar</a>
       </div>
-      <!-- Producto 2 -->
       <div class="card">
         <img src="membrete2.jpg" alt="Membrete Verde">
         <h3>Membrete Sonda Vesical</h3>
         <p>Estilo fresco en color verde, ideal para clínicas.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Verde" target="_blank" class="btn">Comprar</a>
       </div>
-      <!-- Producto 3 -->
       <div class="card">
         <img src="membrete3.jpg" alt="Membrete Rosa">
         <h3>Membrete C.V.C.</h3>
         <p>Un diseño delicado en tonos rosados, elegante y femenino.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Rosa" target="_blank" class="btn">Comprar</a>
       </div>
-      <!-- Producto 4 -->
       <div class="card">
         <img src="membrete4.jpg" alt="Membrete Profesional">
         <h3>Membrete C.V.P</h3>
@@ -173,6 +197,16 @@
       </div>
     </div>
   </div>
+
+  <!-- Catálogo Flipsnack -->
+  <div style="text-align:center; margin:40px 0;">
+  <a href="https://www.flipsnack.com/eslyvilla/cata-logo-membretes-solucio-n-pdf/full-view.html" 
+     target="_blank" 
+     style="padding:15px 30px; background-color:#ff66b3; color:white; font-weight:bold; text-decoration:none; border-radius:10px; font-size:18px;">
+    Ver Catálogo Interactivo
+  </a>
+</div>
+
 
   <footer>
     <p>&copy; 2025 Membretes de Enfermería | Contacto: 5561506732</p>
