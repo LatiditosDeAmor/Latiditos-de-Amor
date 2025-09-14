@@ -1,0 +1,182 @@
+# Latiditos-de-Amor
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membretes de Enfermería</title>
+  <style>
+    /* Fuente bonita y colores suaves */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffe6f0; /* rosa pastel suave */
+      color: #333;
+    }
+
+    header {
+      background-color: #ff99cc; /* rosa más fuerte */
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-family: 'Pacifico', cursive;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #ffb3d9;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+      font-weight: bold;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #ff80bf;
+      transform: scale(1.1);
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ff3399;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #ffe6f0;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      transition: transform 0.5s;
+    }
+
+    .card img:hover {
+      transform: scale(1.1);
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+      color: #ff3399;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #cc3366;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: #ff66b3;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ff3385;
+      transform: scale(1.1);
+    }
+
+    footer {
+      background-color: #ffb3d9;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      font-weight: bold;
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Membretes de Enfermería</h1>
+    <p>Catálogo de membretes personalizados</p>
+  </header>
+
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Diseños</a>
+    <a href="#">Paquetes</a>
+  </nav>
+
+  <div class="container">
+    <h2>Nuestros Diseños</h2>
+    <div class="productos">
+      <!-- Producto 1 -->
+      <div class="card">
+        <img src="membrete1.jpg" alt="Membrete Azul">
+        <h3>Membrete Soluciones</h3>
+        <p>Diseño limpio y profesional en tonos azules.</p>
+        <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Azul" target="_blank" class="btn">Comprar</a>
+      </div>
+      <!-- Producto 2 -->
+      <div class="card">
+        <img src="membrete2.jpg" alt="Membrete Verde">
+        <h3>Membrete Sonda Vesical</h3>
+        <p>Estilo fresco en color verde, ideal para clínicas.</p>
+        <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Verde" target="_blank" class="btn">Comprar</a>
+      </div>
+      <!-- Producto 3 -->
+      <div class="card">
+        <img src="membrete3.jpg" alt="Membrete Rosa">
+        <h3>Membrete C.V.C.</h3>
+        <p>Un diseño delicado en tonos rosados, elegante y femenino.</p>
+        <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Rosa" target="_blank" class="btn">Comprar</a>
+      </div>
+      <!-- Producto 4 -->
+      <div class="card">
+        <img src="membrete4.jpg" alt="Membrete Profesional">
+        <h3>Membrete C.V.P</h3>
+        <p>Diseño formal y corporativo para consultorios médicos.</p>
+        <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Profesional" target="_blank" class="btn">Comprar</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Membretes de Enfermería | Contacto: 5561506732</p>
+  </footer>
+
+</body>
+</html>
