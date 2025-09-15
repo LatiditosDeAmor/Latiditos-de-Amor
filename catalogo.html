@@ -2,20 +2,24 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Catálogo</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
 
+/* Variables de tamaño y colores */
 :root{
-  --book-width: 30%;
-  --book-height: 100%;
-  --bg: #ffe6f0; /* rosa pastel */
+  --book-width: 50vw;       /* ancho base más pequeño */
+  --book-height: 70vh;      /* altura base más pequeña */
+  --book-max-width: 700px;  /* ancho máximo en pantallas grandes */
+  --book-min-width: 350px;  /* ancho mínimo en pantallas pequeñas */
+  --bg: #ffe6f0;            /* rosa pastel */
 }
 
+/* Body y fondo */
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   background: linear-gradient(180deg,var(--bg),#ffffff);
   display:flex;
   flex-direction:column;
@@ -72,9 +76,8 @@ header p {
 
 /* Libro */
 .book{
-  width: min(var(--book-width), 95vw);
-  height: calc(var(--book-height) * (min(1,5vw/var(--book-width))));
-  max-height: 85vh;
+  width: clamp(var(--book-min-width), var(--book-width), var(--book-max-width));
+  height: var(--book-height);
   position: relative;
   perspective: 2500px;
   border-radius: 10px;
@@ -128,7 +131,6 @@ header p {
   z-index: 0;
 }
 
-
 /* Marca de agua */
 .watermark{
   position:absolute;
@@ -178,6 +180,21 @@ header p {
   color:#ff3399;
   font-family: 'Pacifico', cursive;
 }
+
+/* Media Queries para tablets y móviles */
+@media (max-width: 1024px){ /* Tablets */
+  :root{
+    --book-width: 75vw;
+    --book-height: 65vh;
+  }
+}
+
+@media (max-width: 600px){ /* Móviles */
+  :root{
+    --book-width: 95vw;
+    --book-height: 60vh;
+  }
+}
 </style>
 </head>
 <body>
@@ -186,6 +203,11 @@ header p {
   <a href="index.html">Inicio</a>
   <a href="#">Paquetes</a>
 </nav>
+
+<header>
+  <h1>Membretes de Enfermería</h1>
+  <p>Catálogo de membretes personalizados</p>
+</header>
 
 <div class="book" id="book"></div>
 
@@ -228,10 +250,8 @@ function buildBook(){
       </div>
     `;
 
-    page.addEventListener("transitionend", ()=>{
-      if(page.classList.contains("flipped")){
-        page.style.zIndex = 0;
-      }
+    page.addEventListener("transitionend", ()=>{ 
+      if(page.classList.contains("flipped")) page.style.zIndex = 0;
     });
 
     book.appendChild(page);
