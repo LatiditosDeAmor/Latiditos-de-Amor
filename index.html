@@ -88,14 +88,35 @@
       box-shadow: 0 12px 25px rgba(0,0,0,0.2);
     }
 
-    .card img {
-      width: 100%;
+    /* Contenedor de imagen con marca de agua */
+    .img-container {
+      position: relative;
+      overflow: hidden;
       border-radius: 15px;
-      transition: transform 0.5s;
     }
 
-    .card img:hover {
+    .img-container img {
+      width: 100%;
+      transition: transform 0.5s;
+      display: block;
+    }
+
+    .img-container img:hover {
       transform: scale(1.1);
+    }
+
+    /* Marca de agua */
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 36px;
+      font-family: 'Pacifico', cursive;
+      pointer-events: none; /* no interfiere con clicks */
+      white-space: nowrap;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
 
     .card h3 {
@@ -150,6 +171,7 @@
       border-radius: 15px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     }
+
   </style>
 </head>
 <body>
@@ -171,42 +193,59 @@
   <div class="container">
     <h2>Nuestros Diseños</h2>
     <div class="productos">
+
+      <!-- Card con marca de agua -->
       <div class="card">
-        <img src="a1.jpeg" alt="Membrete Soluciones">
+        <div class="img-container">
+          <img src="a1.jpeg" alt="Membrete Soluciones">
+          <div class="watermark">MISS ESLY</div>
+        </div>
         <h3>Membrete Soluciones</h3>
         <p>Estilo lindo y profesional.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Azul" target="_blank" class="btn">Comprar</a>
       </div>
+
       <div class="card">
-        <img src="a2.jpeg" alt="Membrete Sonda Vesical">
+        <div class="img-container">
+          <img src="a2.jpeg" alt="Membrete Sonda Vesical">
+          <div class="watermark">MISS ESLY</div>
+        </div>
         <h3>Membrete Sonda Vesical</h3>
         <p>Estilo lindo y profesional.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Verde" target="_blank" class="btn">Comprar</a>
       </div>
+
       <div class="card">
-        <img src="a3.jpg" alt="Membrete C.V.C.">
+        <div class="img-container">
+          <img src="a3.jpg" alt="Membrete C.V.C.">
+          <div class="watermark">MISS ESLY</div>
+        </div>
         <h3>Membrete C.V.C.</h3>
         <p>Estilo lindo y profesional.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Rosa" target="_blank" class="btn">Comprar</a>
       </div>
+
       <div class="card">
-        <img src="a4.jpg" alt="Membrete C.V.P">
+        <div class="img-container">
+          <img src="a4.jpg" alt="Membrete C.V.P">
+          <div class="watermark">MISS ESLY</div>
+        </div>
         <h3>Membrete C.V.P</h3>
         <p>Estilo lindo y profesional.</p>
         <a href="https://wa.me/525561506732?text=Hola,%20quiero%20comprar%20el%20Membrete%20Profesional" target="_blank" class="btn">Comprar</a>
       </div>
+
     </div>
   </div>
 
   <!-- Catálogo Flipsnack -->
   <div style="text-align:center; margin:40px 0;">
-  <a href="https://www.flipsnack.com/eslyvilla/cata-logo-membretes-solucio-n-pdf/full-view.html" 
-     target="_blank" 
-     style="padding:15px 30px; background-color:#ff66b3; color:white; font-weight:bold; text-decoration:none; border-radius:10px; font-size:18px;">
-    Ver Catálogo Interactivo
-  </a>
-</div>
-
+    <a href="https://www.flipsnack.com/eslyvilla/cata-logo-membretes-solucio-n-pdf/full-view.html" 
+       target="_blank" 
+       style="padding:15px 30px; background-color:#ff66b3; color:white; font-weight:bold; text-decoration:none; border-radius:10px; font-size:18px;">
+      Ver Catálogo Interactivo
+    </a>
+  </div>
 
   <footer>
     <p>&copy; 2025 Membretes de Enfermería | Contacto: 5561506732</p>
