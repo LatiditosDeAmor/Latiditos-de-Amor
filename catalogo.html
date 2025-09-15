@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Catálogo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+:root{
+  --book-width: 30%;
+  --book-height: 100%;
+  --bg: #ffe6f0; /* rosa pastel */
+}
+
+body{
+  margin:0;
+  height:100vh;
+  background: linear-gradient(180deg,var(--bg),#ffffff);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Barra de menú */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #ffb3d9;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: #ff80bf;
+  transform: scale(1.1);
+}
+
+/* Encabezado */
+header {
+  background-color: #ff99cc;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+/* Libro */
+.book{
+  width: min(var(--book-width), 95vw);
+  height: calc(var(--book-height) * (min(1,5vw/var(--book-width))));
+  max-height: 85vh;
+  position: relative;
+  perspective: 2500px;
+  border-radius: 10px;
+}
+
+/* Páginas */
+.page{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 2.5s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border-radius: 10px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.page img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  border-radius: 10px;
+}
+
+/* Lado frontal y posterior */
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+  z-index: 0;
+}
+
+
+/* Marca de agua */
+.watermark{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  color: rgba(255,255,255,0.5);
+  font-size: 36px;
+  font-family: 'Pacifico', cursive;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Controles */
+.controls{
+  margin-top: 20px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.btn{
+  background:#ff66b3;
+  border:none;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color:white;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  background:#ff3385;
+  transform: scale(1.05);
+}
+
+.indicator{
+  padding:8px 12px;
+  background:rgba(255,255,255,0.9);
+  border:1px solid #ccc;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:bold;
+  color:#ff3399;
+  font-family: 'Pacifico', cursive;
+}
+</style>
+</head>
+<body>
+
+ <nav>
+  <a href="index.html">Inicio</a>
+  <a href="#">Paquetes</a>
+</nav>
+
+<header>
+  <h1>Membretes de Enfermería</h1>
+  <p>Catálogo de membretes personalizados</p>
+</header>
+
+<div class="book" id="book"></div>
+
+<div class="controls">
+  <button class="btn" id="prevBtn">◀ Atrás</button>
+  <div class="indicator" id="indicator">Página 1 / 6</div>
+  <button class="btn" id="nextBtn">Adelante ▶</button>
+</div>
+
+<script>
+const pagesData = [
+  ["1.jpeg","2.jpeg"],
+  ["3.jpeg","4.jpeg"],
+  ["5.jpeg","6.jpeg"]
+  // Agregar más páginas según sea necesario
+];
+
+const book = document.getElementById("book");
+const indicator = document.getElementById("indicator");
+let pages = [];
+let current = 0;
+
+function buildBook(){
+  book.innerHTML = "";
+  pages = [];
+  for(let i=0;i<pagesData.length;i++){
+    const [frontImg, backImg] = pagesData[i];
+    const page = document.createElement("div");
+    page.className = "page";
+    page.style.zIndex = pagesData.length - i;
+
+    page.innerHTML = `
+      <div class="side front">
+        <img src="${frontImg}" alt="Página ${i*2+1}">
+        <div class="watermark">MISS ESLY</div>
+      </div>
+      <div class="side back">
+        <img src="${backImg}" alt="Página ${i*2+2}">
+        <div class="watermark">MISS ESLY</div>
+      </div>
+    `;
+
+    page.addEventListener("transitionend", ()=>{
+      if(page.classList.contains("flipped")){
+        page.style.zIndex = 0;
+      }
+    });
+
+    book.appendChild(page);
+    pages.push(page);
+  }
+  updateIndicator();
+}
+
+function updateIndicator(){
+  const totalPages = pagesData.length * 2;
+  const pageNum = current*2 + 1;
+  indicator.textContent = `Página ${pageNum} / ${totalPages}`;
+}
+
+function nextPage(){
+  if(current < pages.length){
+    pages[current].style.zIndex = pages.length + 1;
+    pages[current].classList.add("flipped");
+    current++;
+    updateIndicator();
+  }
+}
+
+function prevPage(){
+  if(current > 0){
+    current--;
+    pages[current].style.zIndex = pages.length + 1;
+    pages[current].classList.remove("flipped");
+    updateIndicator();
+  }
+}
+
+document.getElementById("nextBtn").addEventListener("click", nextPage);
+document.getElementById("prevBtn").addEventListener("click", prevPage);
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="ArrowRight") nextPage();
+  if(e.key==="ArrowLeft") prevPage();
+});
+
+let startX=0;
+book.addEventListener("touchstart",e=>{startX=e.touches[0].clientX});
+book.addEventListener("touchend",e=>{
+  let dx=e.changedTouches[0].clientX-startX;
+  if(dx<-30) nextPage();
+  if(dx>30) prevPage();
+});
+
+buildBook();
+</script>
+
+</body>
+</html>
