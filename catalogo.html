@@ -26,6 +26,7 @@ body{
   align-items:center;
   justify-content:flex-start;
   font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden; /* evita scroll horizontal */
 }
 
 /* Barra de menú */
@@ -81,6 +82,8 @@ header p {
   position: relative;
   perspective: 2500px;
   border-radius: 10px;
+  margin: 0 auto; /* centra horizontalmente */
+  max-width: 100vw; /* nunca se pase del ancho de la pantalla */
 }
 
 /* Páginas */
@@ -219,9 +222,22 @@ header p {
 
 <script>
 const pagesData = [
-  ["1.jpeg","2.jpeg"],
-  ["3.jpeg","4.jpeg"],
-  ["5.jpeg","6.jpeg"]
+  ["1.jpeg"],
+  ["2.jpeg"],
+  ["3.jpeg"],
+  ["4.jpeg"],
+  ["5.jpeg"],
+  ["6.jpeg"],
+  ["7.jpeg"],
+  ["8.jpeg"],
+  ["9.jpeg"],
+  ["10.jpeg"],
+  ["11.jpeg"],
+  ["12.jpeg"],
+  ["13.jpeg"],
+  ["14.jpeg"],
+  ["15.jpeg"]
+
   // Agregar más páginas según sea necesario
 ];
 
