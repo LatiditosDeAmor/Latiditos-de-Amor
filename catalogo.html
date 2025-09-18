@@ -25,6 +25,7 @@ body{
   justify-content:flex-start;
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
+  user-select: none; /* evita seleccionar texto/imágenes */
 }
 
 nav {
@@ -91,6 +92,16 @@ header p { margin: 5px 0 0; font-size: 16px; }
   object-fit: cover;
   display:block;
   border-radius: 10px;
+  pointer-events: none; /* evita arrastrar imágenes */
+}
+
+/* Bloqueo extra: pseudo-elemento invisible sobre cada página */
+.page::after {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:5;
 }
 
 .side { 
@@ -106,17 +117,28 @@ header p { margin: 5px 0 0; font-size: 16px; }
 .back { transform: rotateY(180deg); }
 .page.flipped { transform: rotateY(-180deg); }
 
+/* Marca de agua en mosaico */
 .watermark{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  color: rgba(255,255,255,0.5);
-  font-size: 36px;
+  inset:0;
+  background-image: repeating-linear-gradient(
+    -30deg,
+    rgba(255,255,255,0.4) 0,
+    rgba(255,255,255,0.4) 80px,
+    transparent 80px,
+    transparent 160px
+  );
+  font-size: 60px;
+  font-weight: bold;
   font-family: 'Pacifico', cursive;
-  pointer-events: none;
-  white-space: nowrap;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  white-space:nowrap;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
 }
 
 .controls{
@@ -176,7 +198,7 @@ header p { margin: 5px 0 0; font-size: 16px; }
 }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <!-- bloquea clic derecho -->
 
 <nav>
   <a href="index.html">Inicio</a>
@@ -219,7 +241,6 @@ function buildBook(){
     page.className = "page";
     page.style.zIndex = pagesData.length - i;
 
-    // el reverso ahora muestra la SIGUIENTE imagen si existe
     page.innerHTML = `
       <div class="side front">
         <img src="${pagesData[i]}" alt="Página ${i+1}">
