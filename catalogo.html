@@ -7,7 +7,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
 
-/* Variables de tamaño y colores */
 :root{
   --book-width: 50vw;
   --book-height: 70vh;
@@ -16,7 +15,6 @@
   --bg: #ffe6f0;
 }
 
-/* Body y fondo */
 body{
   margin:0;
   min-height:100vh;
@@ -29,7 +27,6 @@ body{
   overflow-x: hidden;
 }
 
-/* Barra de menú */
 nav {
   display: flex;
   justify-content: center;
@@ -37,7 +34,6 @@ nav {
   width: 100%;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 nav a {
   color: white;
   padding: 14px 20px;
@@ -47,13 +43,11 @@ nav a {
   transition: 0.3s;
   border-radius: 5px;
 }
-
 nav a:hover {
   background-color: #ff80bf;
   transform: scale(1.1);
 }
 
-/* Encabezado */
 header {
   background-color: #ff99cc;
   width: 100%;
@@ -64,11 +58,9 @@ header {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
-
 header h1 { margin: 0; font-size: 28px; }
 header p { margin: 5px 0 0; font-size: 16px; }
 
-/* Libro */
 .book{
   width: clamp(var(--book-min-width), var(--book-width), var(--book-max-width));
   height: var(--book-height);
@@ -79,7 +71,6 @@ header p { margin: 5px 0 0; font-size: 16px; }
   max-width: 100vw;
 }
 
-/* Páginas */
 .page{
   width:100%;
   height:100%;
@@ -88,13 +79,12 @@ header p { margin: 5px 0 0; font-size: 16px; }
   left:0;
   transform-origin: left center;
   transform-style: preserve-3d;
-  transition: transform 2.5s ease;
+  transition: transform 1.8s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   border-radius: 10px;
   z-index: 0;
   overflow: hidden;
 }
-
 .page img{
   width:100%;
   height:100%;
@@ -103,13 +93,19 @@ header p { margin: 5px 0 0; font-size: 16px; }
   border-radius: 10px;
 }
 
-/* Lado frontal y posterior */
-.side { position: absolute; width: 100%; height: 100%; top: 0; left: 0; backface-visibility: hidden; border-radius: 10px; }
+.side { 
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+  top: 0; 
+  left: 0; 
+  backface-visibility: hidden; 
+  border-radius: 10px; 
+}
 .front { transform: rotateY(0deg); }
 .back { transform: rotateY(180deg); }
-.page.flipped { transform: rotateY(-180deg); z-index: 0; }
+.page.flipped { transform: rotateY(-180deg); }
 
-/* Marca de agua */
 .watermark{
   position:absolute;
   top:50%;
@@ -123,14 +119,12 @@ header p { margin: 5px 0 0; font-size: 16px; }
   text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Controles */
 .controls{
   margin-top: 20px;
   display:flex;
   gap:12px;
   align-items:center;
 }
-
 .btn{
   background:#ff66b3;
   border:none;
@@ -142,12 +136,10 @@ header p { margin: 5px 0 0; font-size: 16px; }
   color:white;
   transition: 0.3s;
 }
-
 .btn:hover{
   background:#ff3385;
   transform: scale(1.05);
 }
-
 .indicator{
   padding:8px 12px;
   background:rgba(255,255,255,0.9);
@@ -159,7 +151,6 @@ header p { margin: 5px 0 0; font-size: 16px; }
   font-family: 'Pacifico', cursive;
 }
 
-/* Botón de comprar */
 .buy-btn{
   margin-top: 15px;
   background:#ff3399;
@@ -172,13 +163,11 @@ header p { margin: 5px 0 0; font-size: 16px; }
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition:0.3s;
 }
-
 .buy-btn:hover{
   background:#ff1a75;
   transform: scale(1.05);
 }
 
-/* Media Queries */
 @media (max-width: 1024px){
   :root{ --book-width: 75vw; --book-height: 65vh; }
 }
@@ -206,16 +195,15 @@ header p { margin: 5px 0 0; font-size: 16px; }
   <button class="btn" id="nextBtn">Adelante ▶</button>
 </div>
 
-<!-- Botón de comprar -->
 <a class="buy-btn" href="https://wa.me/5561506732?text=Hola,%20quiero%20comprar%20los%20membretes" target="_blank">
   Comprar por WhatsApp
 </a>
 
 <script>
 const pagesData = [
-  ["1.jpeg"],["2.jpeg"],["3.jpeg"],["4.jpeg"],["5.jpeg"],
-  ["6.jpeg"],["7.jpeg"],["8.jpeg"],["9.jpeg"],["10.jpeg"],
-  ["11.jpeg"],["12.jpeg"],["13.jpeg"],["14.jpeg"],["15.jpeg"]
+  "1.jpeg","2.jpeg","3.jpeg","4.jpeg","5.jpeg",
+  "6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg",
+  "11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg"
 ];
 
 const book = document.getElementById("book");
@@ -227,25 +215,21 @@ function buildBook(){
   book.innerHTML = "";
   pages = [];
   for(let i=0;i<pagesData.length;i++){
-    const [frontImg, backImg] = pagesData[i];
     const page = document.createElement("div");
     page.className = "page";
     page.style.zIndex = pagesData.length - i;
 
+    // el reverso ahora muestra la SIGUIENTE imagen si existe
     page.innerHTML = `
       <div class="side front">
-        <img src="${frontImg}" alt="Página ${i+1}">
+        <img src="${pagesData[i]}" alt="Página ${i+1}">
         <div class="watermark">MISS ESLY</div>
       </div>
       <div class="side back">
-        <img src="${backImg || frontImg}" alt="Página ${i+1}">
-        <div class="watermark">MISS ESLY</div>
+        <img src="${pagesData[i+1] || pagesData[i]}" alt="Página ${i+2}">
+        <div class="watermark">Latiditos de Amor</div>
       </div>
     `;
-
-    page.addEventListener("transitionend", ()=>{
-      if(page.classList.contains("flipped")) page.style.zIndex = 0;
-    });
 
     book.appendChild(page);
     pages.push(page);
@@ -254,14 +238,11 @@ function buildBook(){
 }
 
 function updateIndicator(){
-  const totalPages = pages.length;
-  const pageNum = current + 1;
-  indicator.textContent = `Página ${pageNum} / ${totalPages}`;
+  indicator.textContent = `Página ${current + 1} / ${pages.length}`;
 }
 
 function nextPage(){
-  if(current < pages.length){
-    pages[current].style.zIndex = pages.length + 1;
+  if(current < pages.length - 1){
     pages[current].classList.add("flipped");
     current++;
     updateIndicator();
@@ -271,13 +252,11 @@ function nextPage(){
 function prevPage(){
   if(current > 0){
     current--;
-    pages[current].style.zIndex = pages.length + 1;
     pages[current].classList.remove("flipped");
     updateIndicator();
   }
 }
 
-// Botones y teclado
 document.getElementById("nextBtn").addEventListener("click", nextPage);
 document.getElementById("prevBtn").addEventListener("click", prevPage);
 document.addEventListener("keydown",(e)=>{
@@ -285,7 +264,6 @@ document.addEventListener("keydown",(e)=>{
   if(e.key==="ArrowLeft") prevPage();
 });
 
-// Swipe para móviles
 let startX=0;
 book.addEventListener("touchstart",e=>{startX=e.touches[0].clientX});
 book.addEventListener("touchend",e=>{
@@ -299,4 +277,3 @@ buildBook();
 
 </body>
 </html>
-
